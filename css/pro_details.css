@@ -1,0 +1,90 @@
+.optacion{
+		width: 860px;
+		height: 30px;
+		background: #FFFFFF;
+		opacity: 0.6;
+		position: absolute;
+		z-index: 2;
+		right: 50%;
+		margin-right: -560px;
+		margin-top: -30px;
+		-webkit-opacity:0.6;//谷歌&苹果
+		-moz-opacity:0.6;//火狐
+		filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+}
+.pro_text{
+		width: 1200px;
+		margin: 0 auto;
+}
+.pro_text img{
+		margin-top: 90px;
+		margin-left: 40px;
+		float: left;
+		border-bottom: 2px solid #cccccc;
+		cursor: pointer;
+}
+.pro_text_contact{
+		width: 802px;
+		float: right;
+		margin-left: 18px;
+		margin-top: 90px;
+}
+.pro_text_contact h2{
+		width: 731px;
+		font-family: "微软雅黑";
+		font-size: 28px;
+		color: #333333;
+		font-weight: normal;
+		border-bottom: 2px solid #CCCCCC;
+}
+.pro_text_contact h5{
+
+		font-family: "微软雅黑";
+		font-size: 17px;
+		color: #333333;
+		font-weight: normal;
+		margin-top: 31px;
+		margin-left: 5px;
+		margin-bottom: 23px;
+}
+.pro_text_contact b{
+		font-family: "微软雅黑";
+		font-size: 13px;
+		color: #666666;
+		font-weight: normal;
+		display: inline-block;
+		margin-bottom: 40px;
+}
+.pro_text_contact h2+h5+b{
+		margin-left: 45px;
+		margin-right: 29px;
+}
+.pro_text_contact span{
+		font-family: "微软雅黑";
+		font-size: 11px;
+		color: #999999;
+}
+.pro_text_contact p{
+		font-family: "微软雅黑";
+		font-size: 13px;
+		color: #666666;
+}
+.next{
+		margin-left: 40px;
+		margin-top: 370px;
+		float: left;
+		margin-bottom: 41px;
+		font-family: "微软雅黑";
+		font-size: 13px;
+}
+.next p{
+		margin-bottom: 17px;
+		color: #666666;
+}
+.next p a{
+		color: #333333;
+}
+.next p a:hover{
+		text-decoration: underline;
+		color: #ff9966;
+}

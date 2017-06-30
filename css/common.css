@@ -1,0 +1,82 @@
+.middle{
+		width: 100%;
+}
+.about_tit{
+		width: 600px;
+		height: 64px;
+		margin: 0 auto;
+		margin-top: 90px;
+		border-bottom: 1px solid #808080;
+}
+.about_tit p{
+		font-family: "微软雅黑";
+		font-size: 17px;
+		color: #999999;
+		text-align: center;
+}
+.about_tit h2{
+		font-family: "微软雅黑";
+		font-size: 28px;
+		color: #333333;
+		text-align: center;
+}
+.middle_font_bg{
+		height: 30px;
+		width: 100%;
+		background: #e6e6e6;
+		margin: 0 auto;
+}
+.middle_font{
+		width: 1200px;
+		height: 30px;
+		margin: 0 auto;
+		line-height: 30px;
+		position: relative;
+}
+.middle_font p{
+		width: 500px;
+		height: 30px;
+		font-family: "微软雅黑";
+		font-size: 13px;
+		color: #666666;
+}
+.middle_font p a{
+		color: #666666;
+}
+.middle_font p a:hover{
+		color: #ff9966;
+		text-decoration: underline;
+}
+.middle_font p b{
+		width: 15px;
+		height: 30px;
+		display: block;
+		float: left;
+		background: url(../img/bbw.jpg) no-repeat left;
+		margin-right: 18px;
+
+}
+.middle_font_bg ul{
+		height: 50px;
+		position: absolute;
+		right: 50%;
+		margin-right: -550px;
+		z-index: 2;
+		top: 600px;
+}
+.middle_font_bg ul li{
+		width: 120px;
+		height: 50px;
+		background: #0a9241;
+		text-align: center;
+		line-height: 50px;
+		float: left;
+}
+.middle_font_bg ul li a{
+		width: 120px;
+		height: 50px;
+		display: block;
+		font-family: "微软雅黑";
+		font-size: 13px;
+		color: #ccffcc;
+}
