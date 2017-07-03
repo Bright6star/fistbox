@@ -1,0 +1,92 @@
+/************************************************内容****************************************************/
+.about{
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 49px;
+	overflow: hidden;
+}
+.about .sidebar{
+	width: 200px;
+	float: left;
+}
+.about .content{
+	width: 949px;
+	float: right;
+	
+}
+/*边导航标题*/
+.sidebar_title{
+	display: block;
+	width: 200px;
+	height: 100px;
+	background: #f18f02;
+	font-size: 20px;
+	text-align: center;
+	padding-top: 31px;
+}
+.sidebar_title span{
+	color: #FFFFFF;
+}
+.sidebar_title h2{
+	color: #FFFFFF;
+}
+/*边导航*/
+.sidebar ul{
+	width: 200px;
+	background: #ffedc5;
+	padding-top: 4px;
+}
+.sidebar ul li{
+	margin-bottom: 4px;
+	line-height: 55px;
+	text-align: center;
+	font-size: 18px;
+	width: 200px;
+	height: 50px;
+}
+.sidebar ul li a{
+	display: block;
+}
+.sidebar ul li:hover a{
+	background: red;
+	color: white;
+}
+.sidebar .currents a{
+	background: red;
+	color: white;
+}
+
+/*当前位置*/
+.location{
+	width: 949px;
+	height: 31px;
+	border-bottom: 1px solid #a3a3a3;
+}
+.location ul li {
+	float: left;
+	line-height: 31px;
+	font-size: 16px;
+}
+.location_current a{
+	color: red;
+}
+/*文案*/
+.content .main{
+	width: 872px;
+	/*height: 100%;*/
+	padding-left: 77px;
+	margin-top: 18px;
+	
+}
+.main p{
+	text-indent: 3em;
+	padding-bottom: 33px;
+	font-size: 12px;
+}
+.main img{
+	padding-bottom: 30px;
+	margin-right: 26px;
+}
+.main p:first-child+p+p{
+	padding-bottom: 0px;
+}

@@ -1,0 +1,174 @@
+.content{
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+.sidebar{
+	width: 200px;
+	float: left;
+}
+/*边导航标题*/
+.sidebar_title{
+	display: block;
+	width: 200px;
+	height: 100px;
+	background: #f18f02;
+	font-size: 20px;
+	text-align: center;
+	padding-top: 31px;
+}
+.sidebar_title span{
+	color: #FFFFFF;
+}
+.sidebar_title h2{
+	color: #FFFFFF;
+}
+/*边导航*/
+.sidebar ul{
+	width: 200px;
+	background: #ffedc5;
+	padding-top: 4px;
+}
+.sidebar ul li{
+	margin-bottom: 4px;
+	line-height: 55px;
+	text-align: center;
+	font-size: 18px;
+	width: 200px;
+	height: 50px;
+}
+.sidebar ul li a{
+	display: block;
+}
+.sidebar ul li:hover a{
+	background: red;
+	color: white;
+}
+.sidebar .currents a{
+	background: red;
+	color: white;
+}
+
+/*当前位置*/
+.location{
+	width: 949px;
+	height: 31px;
+	border-bottom: 1px solid #a3a3a3;
+}
+.location ul li {
+	float: left;
+	line-height: 31px;
+	font-size: 16px;
+}
+.location_current a{
+	color: red;
+}
+.product_content{
+	width: 949px;
+	float: right;
+}
+.pro_list{
+	width: 815px;
+	padding-top: 32px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.pro_list ul{
+	width: 915px;
+	height: 100%;
+}
+.pro_list ul li{
+	width: 202px;
+	height: 202px;
+	float: left;
+	margin-right: 100px;
+	margin-bottom: 30px;
+	border: 1px solid #999999;
+	position: relative;
+}
+/*下方色块*/
+.pro_list ul li span{
+	width: 202px;
+	height: 40px;
+	background: #d3d3d3;
+	display: block;
+	float: right;
+	position: absolute;
+	bottom: 0;
+	color: #666666;
+	font-size: 14px;
+	line-height: 40px;
+	text-align: center;
+}
+/*图片*/
+.pro_list ul li img{
+	position: absolute;
+}
+
+/*遮罩层*/
+.pro_list ul li .opacity{
+	width: 202px;
+	height: 177px;
+	display: block;
+	position: absolute;
+	opacity: 0.3;
+	background: black;
+	padding-top: 25px;
+	display: none; 
+	-webkit-opacity:0.3;
+	-moz-opacity:0.3;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+}
+.pro_list ul li .opacity a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/*文字*/
+.pro_list ul li i{
+	font-size: 12px;
+    color:white !important;
+    line-height: 23px;
+    margin-left: 28px;
+	display: none;
+}
+.pro_list ul li:hover .opacity{
+	display: block;	
+}
+.pro_list ul li :hover i{
+	display: block;
+	
+}
+.pro_list ul li:hover span{
+	display: none;
+}
+
+/*页码*/
+.page{
+	width: 480px;
+	height: 27px;
+	margin: 0 auto;	
+	position: relative;	
+	bottom: 60px;
+}
+.page ul li{
+	float: left;
+	border: 1px solid #666666;
+	margin-right: 8px;
+	margin-top: 85px;
+	font-size: 13px;
+	
+}
+.page ul li a{
+	padding: 4px 8px;
+	height: 100%;
+	display: block;
+}
+.page ul li:first-child+li+li+li+li+li+li{
+	border: none;
+}
+.page ul li:hover{
+	border: 1px solid white;
+	background: #f1ab5f;
+}

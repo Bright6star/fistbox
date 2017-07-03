@@ -1,0 +1,171 @@
+/************************************内容*******************************************/
+.content{
+	height: 1356px;
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+/*标题*/
+.contact_title{
+	width: 100%;
+	height: 93px;
+	border-bottom: 1px solid #a3a3a3;
+}
+.contact_title .current_ a{
+	color: red;
+}
+
+.contact_title h3{
+	display: block;
+	text-align: center;
+	color: #f1ab5f;
+	font-size: 24px;
+}
+.contact_title span{
+	display: block;
+	text-align: center;
+	color: #f1ab5f;
+	font-size: 24px;
+}
+.contact_title ul {
+	width: 215px;
+	height: 40px;
+	float: right;
+}
+.contact_title ul li{
+	float: left;
+}
+
+/*地图*/ 
+.map{
+	width: 1077px;
+	height: 545px;
+	margin: 0 auto;
+	margin-top: 75px;
+	margin-bottom: 70px;
+}
+.map span{
+	display: block;
+	font-size: 20px;
+	color: #f1ab5f;
+	margin-bottom: 27px;
+}
+.map iframe{
+	width:1077px;
+	height:491px;
+}
+
+
+
+/*留言*/
+.mes{
+	width: 1077px;
+	height: 544px;
+	margin: 0 auto;
+}
+.mes span{
+	display: block;
+	font-size: 20px;
+	color: #f1ab5f;
+	padding-bottom: 32px;
+}
+.mes form label{
+	color: #999999;
+	font-size: 15px;
+	display: block;
+}
+
+.name {
+	width: 355px;
+	height: 63px;
+	float: left;
+}
+.email{
+	width: 355px;
+	height: 63px;
+	float: left;	
+}
+.phone{
+	width: 355px;
+	height: 63px;
+	float: left;
+}
+.texta{
+	height: 283px;
+	width: 100%;
+	padding-top: 40px;
+}
+.texta textarea{
+	width: 1077px;
+	height: 260px;
+	border: 1px solid #999999;
+	resize: none;
+	text-indent: 1em;
+}
+.name input[type="text"]{
+	width: 300px;
+	height: 30px;
+	margin-top: 10px;
+	border: 1px solid #999999;
+	text-indent: 1em;
+	line-height: 30px;
+}
+.email input[type="text"]{
+	width: 300px;
+	height: 30px;
+	margin-top: 10px;
+	border: 1px solid #999999;
+	text-indent: 1em;
+	line-height: 30px;
+}
+.phone input[type="text"]{
+	width: 300px;
+	height: 30px;
+	margin-top: 10px;
+	border: 1px solid #999999;
+	text-indent: 1em;
+	line-height: 30px;
+}
+.mes_footer{
+	width: 408px;
+	height:35px;
+	float: right;
+	padding-top: 24px;
+}
+/*验证码*/
+.mes_footer img{
+	float: left;
+	margin-right: 13px;
+}
+/*输入框*/
+.mes_footer input[type="text"]{
+	width: 200px;
+	height: 32px;
+	border: 1px solid #999999;
+	margin-right: 13px;
+	text-indent: 1em;
+	line-height: 32px;
+	color: black !important;
+}
+/*提交*/
+.mes_footer  input[type="submit"]{
+	width: 80px;
+	height: 35px;
+	border: 1px solid #999999;
+	background: #f1ab5f;
+	color: white;
+	cursor: pointer;
+}
+/*重置*/
+.mes_footer input[type="reset"]{
+	float: right;
+	border: 0;
+	border-bottom: 1px solid #999999;
+	background: white;
+	cursor: pointer;
+	width: 80px;
+	height: 28px;
+	margin-top: 20px;
+	color: #999999;
+	font-size: 18px;
+}
