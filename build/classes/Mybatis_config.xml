@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 配置信息 -->
+<configuration>
+	<typeAliases>
+		<!-- 给数据传输类起一个别名 (type:数据传输类 alias:别名) -->
+		<typeAlias type="dto.User" alias="user" />
+		<typeAlias type="dto.GoodsType" alias="goodstype" />
+		<typeAlias type="dto.Goods" alias="goods" />
+		<typeAlias type="dto.Pic" alias="pic" />
+		<typeAlias type="dto.Order" alias="order" />
+		<typeAlias type="dto.OrderItem" alias="orderItem" />
+	</typeAliases>
+
+	<!-- 配置MyBatis3的环境 -->
+	<environments default="env">
+		<!-- 配置一个环境 -->
+		<environment id="env">
+			<!-- 配置事务管理器 JDBC(有事务)、MANAGED(托管) -->
+			<transactionManager type="JDBC" />
+			<!-- 配置数据源 JNDI(web服务器方式定义数据源)、POOLED(自带连接池)、UNPOOLED(不带连接池) -->
+			<dataSource type="POOLED">
+				<!-- 连接数据库驱动 -->
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<!-- 连接数据库URL -->
+				<property name="url" value="jdbc:mysql:///project3" />
+				<!-- 连接数据库用户名 -->
+				<property name="username" value="root" />
+				<!-- 连接数据库密码 -->
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 配置xxxMapper.xml文件 -->
+	<mappers>
+		<mapper resource="mapper/UserMapper.xml" />
+		<mapper resource="mapper/GoodsTypeMapper.xml" />
+		<mapper resource="mapper/GoodsMapper.xml" />
+		<mapper resource="mapper/PicMapper.xml" />
+		<mapper resource="mapper/OrderMapper.xml" />
+		<mapper resource="mapper/OrderItemMapper.xml" />
+	</mappers>
+
+
+
+</configuration>

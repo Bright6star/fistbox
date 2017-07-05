@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="dto.GoodsType">
+	<sql id="findGoodsType">
+		select * from goodstype
+	</sql>
+	<!-- 根据code查询商品类型 -->
+	<select id="findGoodsTypeByCode" resultType="GoodsType">
+		<include refid="findGoodsType"/>
+		<where>
+			code = #{code}
+		</where>
+	</select>
+	
+	<select id="getGoodsTypeList" resultMap="GoodsTypeResultMap">
+		<include refid="findGoodsType"/>
+		order by code asc
+	</select>
+	
+	<delete id="getDelete">
+		delete from goodstype where code = #{code}
+	</delete>
+	
+	<resultMap id="GoodsTypeResultMap" type="GoodsType" autoMapping="true"/>
+	
+	<select id="getUserById" resultMap="GoodsTypeResultMap">
+			<include refid="findGoodsType"/>
+			<where>
+				code = #{code}
+			</where>
+	</select>
+	
+	<insert id="getAddGT">
+		insert into goodstype(code,name,remark) 
+		values(#{code},#{name},#{remark})
+	</insert>
+	
+	<update id="getUpdate">
+		update goodstype set name = #{name},remark = #{remark}
+		where code = #{code}
+	</update>
+	
+	
+</mapper>

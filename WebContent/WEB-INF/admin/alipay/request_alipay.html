@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>后台管理系统</title>
+	<meta charset="UTF-8">
+	<#assign ctx=request.contextPath>
+    <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+    <script type="text/javascript">
+   
+   		$(function(){
+	   		$("#alipayForm").submit();
+  		 });
+   </script>
+   	
+</head>
+<body>
+    <form id="alipayForm" action="${requestUrl}" method="POST">
+    	<#list params?keys as key>
+    		<input type="hidden" name="${key}" value="${params[key]}">
+    	</#list>
+    </form>
+</body>
+</html>

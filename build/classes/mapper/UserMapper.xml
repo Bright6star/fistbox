@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="dto.User">
+	<sql id="findUser">
+		select * from user
+	</sql>
+	
+	<select id="getLikeUserList" resultMap="userBaseResultMap">
+		<include refid="findUser"/>
+		<if test="userId != null &amp;&amp; userId != ''">
+			<where>
+				userId like concat('%',#{userId},'%')
+			</where>
+		</if>
+	</select>
+	
+	<update id="getUpdate">
+		update user set name = #{name} ,
+		root = #{root}, province = #{province},city = #{city},
+		phone = #{phone},email = #{email}, address = #{address},
+		birthday = #{birthday}
+		where id = #{id}
+	</update>
+	
+	<delete id="getDelete">
+		delete from user where id = #{id}
+	</delete>
+	
+	<select id="getUserList" resultMap="userBaseResultMap">
+		<include refid="findUser"/>
+		<if test="userId != null &amp;&amp; userId != ''">
+			<where>
+				userId like concat('%',#{userId},'%')
+			</where>
+		</if>
+	</select>
+	
+	
+	<select id="getUserByUserIdAndByPassword" resultMap="userBaseResultMap">
+		<include refid="findUser" />
+		<where>
+			userId = #{userId} and pwd = #{pwd}
+		</where>
+	</select>
+	
+	<select id="getUserById" resultMap="userBaseResultMap">
+			<include refid="findUser"/>
+			<where>
+				id = #{id}
+			</where>
+	</select>
+	
+	<select id="getAdmin" resultMap="userBaseResultMap">
+		<include refid="findUser" />
+		<where>
+			userId = #{userId} and pwd = #{pwd} and root =#{root} 
+		</where>
+	</select>
+	
+	<select id="getUserByUserId" resultType="int">
+			select count(*) from user where userId = #{userId} 
+	</select>
+	
+	<select id="getOrderByUserId" resultType="int">
+			SELECT * FROM `user` where true
+			<if test="user!=null &amp;&amp; user.userId!=null &amp;&amp; user.userId!=''">
+			and userId = #{user.userId}
+			</if> 
+	</select>
+	
+	<insert id="save">
+		insert into user(userId,pwd,email,phone,activeCode) values(#{userId},#{pwd},#{email},#{phone},#{activeCode})
+	
+	</insert>
+	
+	<insert id="insert">
+		insert into user(userId,pwd,email,phone,
+		name,root,province,city,address,
+		birthday,activeStatus
+		)values(
+		#{userId},#{pwd},#{email},#{phone},
+		#{name},#{root},#{province},
+		#{city},#{address},#{birthday},#{activeStatus}
+		)
+	
+	</insert>  
+	<!-- 用户帐号激活 -->
+	<update id="activeUser">
+		update user set activeStatus = 1 where userId = #{userId} and activeCode = #{activeCode}
+	
+	</update>
+	
+	<resultMap id="userBaseResultMap" type="User" autoMapping="true"></resultMap>
+	<!-- <resultMap id="userOResultMap" type="User" autoMapping="true">
+		<association property="user" column="userId" javaType="user"></association>
+	</resultMap> -->
+	<insert id="ccs" parameterType="dto.User">
+		insert into project(user_id,pass_word) values(${userId},${password});
+	</insert>
+
+</mapper>

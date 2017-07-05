@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>产品详情页</title>
+
+<link rel="stylesheet" type="text/css" href="css/pro.css">
+
+<#include "header.html"/>
+<#import "/macros/header_macros.html" as header_macro>
+<#import "/macros/footer_macros.html" as footer_macro>
+<#import "/macros/nav_macros.html" as nav_macro>
+
+<script type="text/javascript">
+	$(function(){
+		
+	
+	$("#dian").click(function() {
+		window.location.href = "confirm_order.html";
+	});
+	
+	
+	$("#gwc").click(function() {
+		var url="${ctx}/addBuyCar";
+		var params = {"goodsId":$("#goodsId").val(),"shuz":$("#shuz").val()};
+		$.post(url,params,function(data){
+			if(data.status==0){
+			alert("添加成功");
+			}else{
+			alert("添加失败");
+			}
+		},"json");
+	});
+	});
+</script>
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+<body>
+	<@header_macro.header ctx="${ctx}"/>
+	<@nav_macro.nav ctx="${ctx}"/>
+
+	<div class="content">
+		<div class="ct_left">
+			<ul>
+				<li><a href="#"><span>热卖精品</span><img
+						src="images/2_shop_18.jpg" width="192" height="251" alt="pic"
+						title="pic" /></a></li>
+
+				<li><a href="#"><img src="images/2_shop_23.jpg" width="192"
+						height="299" alt="pic" title="pic" /></a></li>
+
+			</ul>
+
+		</div>
+
+		<div class="ct_right">
+			<div class="ct_top">
+				位置：全部商品→${goodsType.name}
+				<!-- →底盘护板→起亚专用钛合金底护板 -->
+			</div>
+
+			<div class="ct_r_left">
+				<div class="bigimg">
+					<!--大图片-->
+					<ul id="Bigimg">
+						<li class="now"><img src="images/3_pro_details_03.jpg"
+							width="453" height="415" alt="pic" title="pic" /></li>
+						<li><img src="images/3_pro_details_04.jpg" width="453"
+							height="415" alt="pic" title="pic" /></li>
+						<li><img src="images/3_pro_details_05.jpg" width="453"
+							height="415" alt="pic" title="pic" /></li>
+					</ul>
+				</div>
+				<ul id="Smlimg">
+					<!--小图片-->
+					<li class="now"><a href="javascript:vdio(0);"><img
+							src="images/3_pro_details_07.jpg" width="109" height="101"
+							alt="pic" title="pic" /></a></li>
+					<li><a href="javascript:vdio(0);"><img
+							src="images/3_pro_details_07.jpg" width="109" height="101"
+							alt="pic" title="pic" /></a></li>
+					<li><a href="javascript:vdio(0);"><img
+							src="images/3_pro_details_07.jpg" width="109" height="101"
+							alt="pic" title="pic" /></a></li>
+					<p class="cle"></p>
+				</ul>
+
+
+			</div>
+			<div class="ct_r_right">
+				<p>
+					${goods.title}
+				</p>
+				<div class="clear"></div>
+				<div class="cost">
+					<!--价格-->
+					<p>
+						优惠价： ￥<span>${goods.favorablePrice}</span>
+					</p>
+					<div class="clear"></div>
+				</div>
+
+				<div id="color">
+					<!--颜色选择-->
+					<p>
+						选择颜色：<a href="javascript:vdio(0);"><img
+							src="images/3_pro_details-_03.jpg" width="34" height="34"></a>
+					</p>
+					<div class="clear"></div>
+
+				</div>
+				<div id="size" class="size">
+					<!--尺码选择-->
+					<p>选择尺码：
+					<div>
+						<a href="javascript:vdio(0);">2mm</a> <a
+							href="javascript:vdio(0);">4mm</a> <a href="javascript:vdio(0);">7mm</a>
+					</div>
+					</p>
+					<div class="clear"></div>
+				</div>
+				
+				<div id="amount">
+					<!--数量选择-->
+					<p>选择数量：
+					<div>
+
+						<input id="shuz" name="shuz" class="number" type="text" value="1" /> 
+						<span>
+							<a id="jia" href="javascript:vdio(0);">
+								<img src="images/3_pro_details1_03.png" width="14" height="9" />
+							</a> 
+							<a id="jian" href="javascript:vdio(0);">
+								<img src="images/3_pro_details1_06.png" width="14" height="9" />
+							</a>
+						</span>
+					</div>
+					</p>
+					<div class="clear"></div>
+				</div>
+				<div class="but">
+					<!--购买按钮-->
+					
+					<form action="#" method="post">
+						<input type="hidden" name="goodsId" id="goodsId" value="${goods.id}"> 
+						<a href="javascript:void(0)" id="dian">
+							<input type="button" name="buy" value="立即购买" />
+						</a> 
+						<a href="javascript:void(0)" id='gwc'>
+							<input type="button" name="add" value="加入购物车" />
+						</a>
+					</form>
+				</div>
+				
+				<div class="pay">
+					<!--支付方式-->
+					<p>
+						支付： <a href="#"><img src="images/3_pro_details3.jpg"
+							width="20" height="20"/ >蚂蚁花呗</a> <a href="#"><img
+							src="images/3_pro_details8.jpg" width="20" height="20" />信用卡</a> <a
+							href="#"><img src="images/3_pro_details5.png" width="20"
+							height="20" />支付宝</a>
+
+
+					</p>
+
+
+
+
+				</div>
+
+
+			</div>
+			<div class="clear"></div>
+			<div class="ct_r_buttom">
+				<span class="title">产品详情</span>
+				<ul class="pro">
+					<li>品牌<span>友和</span></li>
+					<li>颜色<span>金色 银色 黑色</span></li>
+					<li>附带服务<span>远程技术支持</span></li>
+					<li>材质<span>钛镁合金</span></li>
+				</ul>
+				<img src="images/3_pro_details_11.jpg" width="417" height="315" />
+				<p>
+					[全网销售领先/品质保证]<br /> <b>友和发动机护板</b><br /> 不影响发动机下沉<br /> 300余款专车专用<br />
+					安全密封防尘省油<br /> 买一送二：送价值<span> 87</span><br /> 活性炭空调滤芯+空气滤芯<br />
+				</p>
+				<div class="clear"></div>
+				<div class="install">
+					安装示意图<span>护板与发动机紧密贴合，使底盘与地面距离最长。</span>
+				</div>
+				<img src="images/3_pro_details_14.jpg" width="987" height="601" /> <span
+					class="title">其他人还购买了</span>
+
+				<ul class="pic">
+					<li><a href="#"><img src="images/3_pro_details_17.jpg"
+							width="214" height="230" /><span class="p_b"><span
+								class="pic_left f-l">¥ 96 </span> <span class="pic_right f-r">已有236人购买</span></span><br />
+							起亚新K5K4K2两厢K3S狮跑智跑赛拉 图福瑞迪秀儿晴雨挡车窗雨眉</a></li>
+
+					<li><a href="#"><img src="images/3_pro_details_19.jpg"
+							width="214" height="230" /><span class="p_b"><span
+								class="pic_left f-l">¥ 96 </span> <span class="pic_right f-r">已有236人购买</span></span><br />
+							起亚新K5K4K2两厢K3S狮跑智跑赛拉 图福瑞迪秀儿晴雨挡车窗雨眉</a></li>
+
+					<li><a href="#"><img src="images/3_pro_details_17.jpg"
+							width="214" height="230" /><span class="p_b"><span
+								class="pic_left f-l">¥ 96 </span> <span class="pic_right f-r">已有236人购买</span></span><br />
+							起亚新K5K4K2两厢K3S狮跑智跑赛拉 图福瑞迪秀儿晴雨挡车窗雨眉</a></li>
+
+					<li><a href="#"><img src="images/3_pro_details_19.jpg"
+							width="214" height="230" /><span class="p_b"><span
+								class="pic_left f-l">¥ 96 </span> <span class="pic_right f-r">已有236人购买</span></span><br />
+							起亚新K5K4K2两厢K3S狮跑智跑赛拉 图福瑞迪秀儿晴雨挡车窗雨眉</a></li>
+				</ul>
+
+				<span class="title">购买评价（2）</span>
+				<div class="evaluate">
+					<span class="evaluate_ct">零**子. 购买了黑色<br />
+						宝贝收到，安装上了，和我的车很匹配，质量感觉也不错！嘿嘿。。。主要是性价比非常高哦！以后就来这里买了。 超级棒！ <span
+						class="date">2016-05-24 04:47:43</span>
+					</span>
+				</div>
+
+				<div class="evaluate">
+					<span class="evaluate_ct">零**子. 购买了黑色<br />
+						宝贝收到，安装上了，和我的车很匹配，质量感觉也不错！嘿嘿。。。主要是性价比非常高哦！以后就来这里买了。 超级棒！ <span
+						class="date">2016-05-24 04:47:43</span>
+					</span>
+				</div>
+			</div>
+
+
+
+
+
+		</div>
+
+		<div class="clear"></div>
+
+	</div>
+	<@footer_macro.footer/>
+
+</body>
+
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="OrderItem.mapper">
+	<sql id="find">
+		SELECT * FROM `orderItem`
+	</sql>
+	
+	<select id="findByOrder" resultMap="orderResultMap">
+		<include refid="find"></include>
+		<where>
+			orderId = #{id}
+		</where>
+	</select>
+	
+	<insert id="saveOrderItem" >
+		insert into orderItem(orderId,goodsId,orderNum
+		)values(
+		#{order.id},#{goods.id},#{orderNum}
+		)
+	</insert>
+	
+	<resultMap id="baseOrderResultMap" type="orderItem" autoMapping="true"/>
+	
+	<resultMap type="orderItem" id="orderResultMap" extends="baseOrderResultMap">
+		<!-- 一对多的关联关系配置（一个商品类型对应多个商品） -->
+		<association property="order" column="orderId" javaType="Order" 
+		select="Order.mapper.findById"/>
+		<association property="goods" column="goodsId" javaType="Goods" 
+		select="dto.Goods.getGoodsById"/>
+	</resultMap> 
+
+</mapper>

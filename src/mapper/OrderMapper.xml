@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="Order.mapper">
+	<sql id="find">
+		SELECT * FROM `order`
+	</sql>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `order`(orderCode,createDate,tradingStatus,totalAmount,userId) VALUES(
+		#{orderCode},#{createDate},#{tradingStatus},#{totalAmount},#{user.id}
+		)
+	</insert>
+	
+	<select id="findByOrder" resultMap="orderItemResultMap">
+		<include refid="find"></include>
+		order by id desc
+	</select>
+	
+	<select id="findByOrderUser" resultMap="orderResultMap">
+		<include refid="find"></include>
+		where true
+		<if test="order != null">
+				<if test="order.orderCode != null &amp;&amp; order.orderCode != ''">
+					and orderCode like concat('%',#{order.orderCode},'%')
+				</if>
+		</if>
+		<if test="order.user != null &amp;&amp;order.user.userId != null &amp;&amp; order.user.userId != ''">
+					and userId like concat('%',#{order.user.userId},'%')
+		</if>
+		order by id desc
+	</select>
+	
+	<update id="updateOrderAlipayStatus">
+		update `order` set tradingStatus=1,alipay=1 where orderCode = #{0}
+	</update>
+
+	<select id="getOrderByUserId" resultMap="orderItemResultMap">
+		<include refid="find"></include>
+		where userId = #{userId}
+	</select>
+	
+	<select id="findById" resultMap="orderResultMap">
+		<include refid="find"></include>
+		<where>
+			id = #{id}
+		</where>
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM `order` where userId = #{userId}
+	</select>
+	
+	<select id="findByPage" resultMap="orderItemResultMap">
+		SELECT * FROM `order` order by id desc limit #{pageModel.startRow},#{pageModel.pageSize} 
+	</select>
+
+	<resultMap id="baseOrderResultMap" type="order" autoMapping="true">
+		<result column="id" property="id"/>
+	</resultMap>
+	
+	<resultMap type="order" id="orderResultMap" extends="baseOrderResultMap">
+		<!-- 一对多的关联关系配置（一个商品类型对应多个商品） -->
+		<association property="user" column="userId" javaType="User" 
+		select="dto.User.getUserById"/>
+	</resultMap>
+	<resultMap type="order" id="orderItemResultMap" extends="baseOrderResultMap">
+		<collection property="orderItems" ofType="OrderItem" javaType="ArrayList" column="id"
+			select="OrderItem.mapper.findByOrder"/>
+
+	</resultMap>
+</mapper>

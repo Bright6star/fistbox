@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="dto.Goods">
+	<sql id="findGood">
+		select * from goods
+	</sql>
+	
+	
+	<delete id="getDelete">
+		delete from goods where id = #{id}
+	</delete>
+	
+	<update id="getUpdate">
+		update goods set title = #{title} ,
+		brandName = #{brandName}, price = #{price},favorablePrice = #{favorablePrice},
+		groundingDate = #{groundingDate},storage = #{storage}, image = #{image},
+		createDate = #{createDate}
+		where id = #{id}
+	</update>
+	
+	<select id="getGoodsById" resultMap="pageGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				id = #{id}
+			</where>
+	</select>
+	<!-- 分页代码 -->
+	<sql id="pageSql">
+		from goods where true
+		<if test="goods != null">
+				<if test="goods.title != null &amp;&amp; goods.title != ''">
+					and title like concat('%',#{goods.title},'%')
+				</if>
+		
+			<if test="goods.goodstype != null &amp;&amp;goods.goodstype.code != null &amp;&amp; goods.goodstype.code != ''">
+						and typeCode like concat('%',#{goods.goodstype.code},'%')
+			</if>
+		</if>
+		order by id asc
+	</sql>
+	
+	<select id="count" resultType="int">
+		select count(*) 
+		<include refid="pageSql"/>
+	</select>
+	
+	<select id="getNewGoods" resultMap="baseGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				title = '新品'
+			</where>
+	</select>
+	
+	<select id="getNewBGGoods" resultMap="baseGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				title = '新品右大'
+			</where>
+	</select>
+	
+	<select id="getHotBGGoods" resultMap="baseGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				title = '热卖左大'
+			</where>
+	</select>
+	
+	<select id="getHotGoods" resultMap="baseGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				title = '热卖'
+			</where>
+	</select>
+	
+	<select id="getSummGoods" resultMap="baseGoodsResultMap">
+			<include refid="findGood"/>
+			<where>
+				title = '夏日'
+			</where>
+	</select>
+	
+	<select id="findByPage" resultMap="pageGoodsResultMap">
+		<trim prefix="select * " suffix="limit">
+			<include refid="pageSql"/>
+		</trim>
+		
+		#{pageModel.startRow},#{pageModel.pageSize} 
+	</select>
+	
+	<insert id="saveGoods" >
+		insert into goods(title,brandName,price,favorablePrice,
+		groundingDate,storage,image,description,typeCode,createDate)
+		 values(#{title},#{brandName},#{price},#{favorablePrice},#{groundingDate},
+		 #{storage},#{image},#{description},#{goodstype.code},#{createDate})
+	</insert>
+	
+	<resultMap id="baseGoodsResultMap" type="Goods" autoMapping="true">
+	</resultMap>
+	
+	<resultMap type="goods" id="pageGoodsResultMap" extends="baseGoodsResultMap">
+		<!-- 一对多的关联关系配置（一个商品类型对应多个商品） -->
+		<association property="goodstype" column="typeCode" javaType="goodstype" 
+		select="dto.GoodsType.findGoodsTypeByCode"/>
+	</resultMap>
+
+
+</mapper>

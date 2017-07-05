@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>提交订单</title>
+<#include "header.html"/>
+<#import "/macros/header_macros.html" as header_macro> 
+<#import "/macros/footer_macros.html" as footer_macro>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/confirm_order.css">
+
+<!--条件注释判断浏览器版本--> <!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+<body>
+
+	<@header_macro.header ctx="${ctx}"/>
+	<div class="nav">
+		<ul class="nav_nav">
+			<li><div class="gib">
+					<div id="oneo">
+						<a href="#">全部商品</a>
+					</div>
+					<div id="mune" class="pd_navlist" onMouseOut="out2()"
+						onMouseOver="show2()">
+						<ul>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />汽车保养</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />应急用品</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />内部装饰</a></li>
+							<li><a href="shop_list.html"><img
+									src="${ctx}/images/3_pro_details_03.png" width="8" height="8" />外观改装</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />座垫/脚垫</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />清洁用品</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />音响改装</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />儿童用品</a></li>
+							<li><a href="#"><img src="${ctx}/images/3_pro_details_03.png"
+									width="8" height="8" />新车必备</a></li>
+
+						</ul>
+					</div>
+				</div></li>
+			<li class="mr"><a href="index.html">首页</a></li>
+			<li><a href="#">内部装饰</a></li>
+			<li><a href="shop_list.html">外观改装</a></li>
+			<li><a href="#">汽车保养</a></li>
+			<li><a href="#">汽车清洁</a></li>
+			<li><a href="#">应急用品</a></li>
+		</ul>
+
+	</div>
+
+	<div class="content">
+		<div class="place">位置：会员中心→购物车</div>
+		<form action="#" method="post">
+			<p class="address">
+				选择地址<span><a href="#">管理收货地址</a></span>
+			</p>
+			<ul class="add">
+				<li class="moren"><span>长沙市</span> <span>开福区</span> <span>
+						通泰街道</span> <span> 湘江明珠大厦</span> <span> 7楼多迪网络（mohai收）15111190909</span>
+					<span class="tacitly">默认地址</span><a>修改本地址</a></li>
+				<li class="moren"><span>长沙市</span> <span>开福区</span> <span>
+						通泰街道</span> <span> 湘江明珠大厦</span> <span> 7楼多迪网络（mohai收）15111190909</span></li>
+				<li class="moren"><span>长沙市</span> <span>开福区</span> <span>
+						通泰街道</span> <span> 湘江明珠大厦</span> <span> 7楼多迪网络（mohai收）15111190909</span></li>
+				<li><span><a href="address.html">新增地址</a></span></li>
+			</ul>
+			<div class="confirm">
+				<p>确认订单信息</p>
+				<div class="list">
+
+					<span>购买的宝贝</span> <span>单价</span> <span>数量</span> <span>优惠</span>
+					<span>小计</span>
+				</div>
+
+				<div class="message">
+				<#if totalMoney gt 0>
+				<#list goodsList as goods>
+					<div class="me1">
+						<a href="pro_details.html"><img
+							src="${ctx}/images/9_confirm_order_03 (2).png" width="82" height="82"
+							class="f-l m-6" /></a>
+						<p class="eva">
+							<a href="pro_details.html">${goods.title}<br />
+								<br /> <span class="total">总计172<span>（含邮费0元）</span></span><br />
+							<br /> 黑色 <br />
+							</a><a href="#"><img src="${ctx}/images/4_pur_history_06.png" width="27"
+								height="26" /></a><a href="#"><img
+								src="${ctx}/images/4_pur_history_08.png" width="27" height="26" /></a><a
+								href="#"><img src="${ctx}/images/4_pur_history_10.png" width="26"
+								height="26" /></a>
+						</p>
+						<div class="clear"></div>
+					</div>
+					<p class="me2">${goods.favorablePrice?c}</p>
+					<p class="me3">${goods.buyNum}</p>
+					<p class="me4">
+						<select name="save">
+							<option>已省0元</option>
+						</select>
+					</p>
+					<p class="me5">${goods.buyMoney}</p>
+					<div class="clear"></div>
+					</#list>
+					</#if>
+					<div class="leave">
+						<label class="bady">宝贝留言：</label>
+						<textarea placeholder="选填对本次交易的说明（建议填写与卖家达成一致的说明）"
+							style="overflow: hidden;"></textarea>
+						<label class="transport">运送方式 </label> <select name="save">
+							<option>快递 免邮</option>
+							<option>快递 自费</option>
+						</select> <span>${totalMoney}</span>
+						<div class="clear"></div>
+					</div>
+					<span class="date">发货时间 卖家承诺订单在买家付款后，48小时内<span>发货</span></span>
+
+					<hr />
+					<span class="total_c">合计 ¥ <span>${totalMoney}</span></span>
+					<div class="clear"></div>
+					<span class="anonymous"><input type="checkbox" /> <label>匿名购买</label></span>
+					<div class="clear"></div>
+					<div class="right">
+						<ul>
+							<li>实付款：¥<span>${totalMoney}</span></li>
+							<li><span>寄送至：</span>${session_user.address}</li>
+							<li><span>收货人</span>${session_user.name}</li>
+						</ul>
+
+
+					</div>
+					<div class="clear"></div>
+
+
+					<a href="javascript:void(0)" id='dian'>
+					<input type="button" value="提交订单" class="but">
+					</a> 
+					<a href="javascript:void(0)" id='fan'>
+					<input type="button" value="返回购物车" class="shopping" />
+					</a>
+
+				</div>
+
+
+				<div class="clear"></div>
+			</div>
+
+		</form>
+	</div>
+	<@footer_macro.footer/>
+</body>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+	$(".moren").each(function(k, v) {
+		$(v).click(function() {
+
+			$(".moren").removeClass("select");
+			$(v).addClass("select");
+		})
+	})
+	$('#dian').click(function() {
+		window.location.href = "${ctx}/saveOrder";
+	});
+	$('#fan').click(function() {
+		window.location.href = "shop_cart.html";
+	});
+</script>
+
+</html>

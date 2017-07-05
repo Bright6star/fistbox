@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购物车</title>
+<#include "header.html"/>
+<#import "/macros/header_macros.html" as header_macro>
+<#import "/macros/footer_macros.html" as footer_macro>
+<#import "/macros/nav_macros.html" as nav_macro>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/shop_cart.css">
+
+
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+<script type="text/javascript">
+
+	var updateCar= function(type,goodsId){
+		var buyNum = parseInt($("#shuz_"+goodsId).val());
+		if(type ==1){
+			if(buyNum == 1){
+				alert("商品数量不能为0!");
+				return;
+			}
+			buyNum -=1;
+		}else{
+			buyNum += 1;
+		}
+		var url ="${ctx}/updateCar";
+		var params = {"goodsId":goodsId,"buyNum":buyNum};
+		$.post(url,params,function(data){
+			if(data.status==0){
+				$("#shuz_"+goodsId).val(buyNum);
+				$("#shuz_"+goodsId).fadeIn(100);
+				calcPrice();
+				shopcarnum();
+			}else{
+			alert("添加失败");
+			}
+		},"json");
+	}
+	
+	function deleteCar(goodsId){
+		var url ="${ctx}/deleteCar";
+		var params = {"goodsId":goodsId};
+		$.post(url,params,function(data){
+			if(data.status==0){
+				$("goods_"+goodsId).fadeToggle(500,function(){
+					this.remove();
+				});
+				calcPrice();
+			}else{
+			alert("删除失败");
+			}
+		},"json");
+	}
+	
+	var calcPrice = function(){
+		/** 获取下面所有选中的checkbox */
+		var boxs = $("input[type='checkbox'][id^='box_']:checked");
+		/** 定义总金额 */
+		var total_price = 0;
+		/** 如果有选中的，就计算 */
+		if (boxs.length > 0){
+			/** 迭代所有选中的checkbox */
+			boxs.each(function(){
+				/** 获取价格 */
+				var price = parseFloat($(this.id.replace("box","#price")).val());
+				/** 获取数量 */
+				var num = parseInt($(this.id.replace("box","#shuz")).val());
+				/* 设置小计金额 **/
+				total_price += price * num;
+			});
+			/** 设置显示总金额 */
+			$("#total_price").html("¥ "+ total_price +" 元");
+		}else{
+			/** 设置显示总金额 */
+			$("#total_price").html("¥ 0.00 元");
+		}
+	};
+
+	function shopcarnum(){
+		var url ="${ctx}/loadAjaxShopCarNum";
+		$.post(url,function(data){
+			if(data.status==0){
+				$("#shopcarNum").text(data.totalNum);
+			}
+		},"json");
+	}
+	
+	function submitOrderBtn(){
+		var boxs = $("input[type='checkbox'][id^='box_']:checked");
+		if(boxs.length == 0){
+			alert("请选择需要提交的商品");
+		}else{
+			//获取选中的复选框的值
+			var ids=boxs.map(function(i,item){
+				return item.value;
+			});
+			$("#goodsIdArrays").val(ids.get());
+			$("#submitOrderForm").submit();
+		}
+	};
+	
+	$(function (){
+		shopcarnum();
+		updateCar();
+	
+	});
+</script>
+
+
+<body>
+	<@header_macro.header ctx="${ctx}"/>
+	<@nav_macro.nav ctx="${ctx}"/>
+	<div class="content">
+		<div class="place">位置：会员中心→购物车</div>
+
+			<ul class="nav_ct">
+			
+				<#if totalMoney gt 0>
+				<#list goodsList as goods>
+				
+				<li id="goods_${goods.id}">
+				<a href="pro_details.html">
+				<img src="${ctx}/${goods.image}" alt="${goods.title}" width="167" height="167" class="f-l" />
+				</a>
+					<div class="sp1">
+						<p class="nav_title">
+							<a href="${ctx}/detail?id=${goods.id}">${goods.title}<br />
+								<br /> <br /> <br /> 黑色 <br /> 规格：3mm<br />
+							</a>
+							
+							<a href="#">
+							<img src="${ctx}/images/4_pur_history_06.png" width="27" height="26" />
+							</a>
+							
+							<a href="#">
+							<img src="${ctx}/images/4_pur_history_08.png" width="27" height="26" />
+							</a>
+							
+							<a href="#"><img src="${ctx}/images/4_pur_history_10.png" width="26" height="26" />
+							</a>
+						</p>
+					</div>
+					<div class="sp2">
+						<div class="amount" id="amount">
+							<!--数量选择-->
+
+							<div>
+								<span>
+								<a class="jia" id="jia" onclick="updateCar(2,${goods.id})">
+								<img src="${ctx}/images/8_shop_cart_03.png" width="11" height="11" />
+								</a>
+								</span>
+								<input class="shuz" id="shuz_${goods.id}" type="text" value="${goods.buyNum}" /> 
+								<span>
+								<a class="jian" id="jian" onclick="updateCar(1,${goods.id})">
+								<img src="${ctx}/images/8_shop_cart_06.png" width="11" height="11" />
+								</a>
+								</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<input type="hidden" value="${goods.favorablePrice?c}" id="price_${goods.id}"/>
+					<div class="sp3">${goods.favorablePrice?c}</div>
+					<div class="sp4">
+						<button onclick="deleteCar(${goods.id})">删除</button>
+						<input type="checkbox" id="box_${goods.id}" checked="checked" value="${goods.id}"/>
+					</div>
+					</li>
+					</#list>
+				</#if>
+					
+			
+				
+			</ul>
+			<div class="pl_but">
+
+				<input type="checkbox" checked="checked"/>
+				<button>全选</button>
+				<button>删除</button>
+				<button>分享</button>
+				<button>对比</button>
+				<label>已选商品<span id="shopcarNum">0</span>件
+				</label> <label>合计(含邮费)：<span id="total_price">¥ ${totalMoney} 元</span></label> 
+				<a href="javascript:void(0)" id="dian">
+				<form id="submitOrderForm" action="${ctx}/smOrder" method="POST" >
+				
+				<input type="hidden" name="goodsIdArrays" id="goodsIdArrays">
+				
+				<input type="button"value="结算" class="butt" onclick="submitOrderBtn()"/>
+				
+				</form>
+				
+			</div>
+
+	</div>
+
+	<@footer_macro.footer/>
+
+</body>
+<script src="js/shop_c.js"></script>
+<script src="js/index.js"></script>
+<script>
+	
+</script>
+
+</html>

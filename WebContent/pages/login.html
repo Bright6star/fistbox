@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎登陆</title>
+<#include "header.html"/>
+<#import "/macros/footer_macros.html" as footer_macro>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/login.css">
+
+<script src="${ctx}/js/artDialog-6.0.2/lib/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+<script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+
+
+<body>
+<script type="text/javascript">
+		/** 监听文档加载完事件 */
+		$(function(){
+
+			/** 为验证码看不清楚绑定点击事件 */
+			 $("a[class='transform']").click(function(){
+				/** 重新设置验证码图片的src属性，让它引用一张新的图片 */
+				
+				$("#vimg").attr("src", "authCode.do?"+Math.random());
+				
+			}); 
+			
+			/** 为表单绑定onsubmit提交事件 */
+			$("#loginBtn").click(function(){
+				/** 做表单输入校验 */
+				var userId = $("#userId");
+				var pwd = $("#pwd");
+				var code = $("#code");
+				var tip = "";
+				if ($.trim(userId.val()) == ""){
+					tip = "账号不能为空！";
+					userId.focus();// 调用文本框获取焦点方法
+				}else if (!/^\w{5,20}$/.test($.trim(userId.val()))){
+					tip = "账号格式不正确！";
+					userId.focus();// 调用文本框获取焦点方法
+				}else if ($.trim(pwd.val()) == ""){
+					tip = "密码不能为空！";
+					pwd.focus();// 调用文本框获取焦点方法
+				}else if (!/^\w{6,20}$/.test($.trim(pwd.val()))){
+					tip = "密码格式不正确！";
+					pwd.focus();// 调用文本框获取焦点方法
+				}/* else if ($.trim(code.val()) == ""){
+					tip = "验证码不能为空！";
+					code.focus();// 调用文本框获取焦点方法
+				}else if (!/^[a-zA-Z0-9]{4}$/.test($.trim(code.val()))){
+					tip = "验证码格式不正确！";
+					code.focus();// 调用文本框获取焦点方法
+				}  */
+				/** 判断表单是否通过校验 */
+				if (tip != ""){
+					alert(tip);
+					return false;
+				}else{
+					var params = $("#loginForm").serialize();
+					var url = "${ctx}/user/loginAjax";
+					$.post(url,params,function(data,status){
+						if(status == "success"){
+							if(data.status == 0){
+								window.location = "${ctx}/index"
+							}else{
+								alert(data.tip);
+								//刷新验证码
+								$("a[class='transform']").trigger("click");
+							}
+						}else{
+							alert("数据加载失败!");	
+						}
+					},"json");
+				}
+			});
+		/** 绑定回车键绑定事件，当用户按了回车键，就提交表单 */
+		$(document).keydown(function(event){
+			if (event.keyCode === 13){ // 等于13代表按了回车键
+				// 触发表单提交按钮的点击事件
+				$("#loginBtn").trigger("click");
+			}
+		});
+		});
+		$(function(){
+			if("$(tip)"!=null){
+				var d=dialog({
+					title:'温馨提示',
+					content:'<font color="red">$(tip)</font>'
+				});
+				d.show();
+				setTimeout(function(){
+					d.close().remove();
+				},2000);
+			}
+		});
+		
+	</script>
+	<div class="header ">
+		<a href="index.html"><img src="${ctx}/images/logo.gif" width="184"
+			height="120" alt="logo" title="logo" class="f-l" /></a>
+		<div class="h_title">欢迎登录</div>
+	</div>
+
+	<div class="content">
+
+		<div class="ct_center">
+
+			<div class="login">
+				<form class="fr1" id="loginForm"  method="post">
+					<div class="reg_t">
+						<label>会员登录</label> <a href="javascript:void(0)" id="dian"><input
+							type="button" value="立即注册" class="reg" /><img
+							src="${ctx}/images/jiantou_03.png" width="10" height="12" class="img" /></a>
+					</div>
+					<div class="reg_c">
+						<a href="#"><img src="${ctx}/images/er_03.png" width="106"
+							height="94" class="f-r" /></a>
+						<p class="p3">
+							<img src="${ctx}/images/7_login_03.png" width="30" height="33" /><input
+								type="text" id="userId" name="userId" value="admin"/>
+						</p>
+						<div>
+							<img src="${ctx}/images/7_login_06.png" width="28" height="33" /><input
+								type="password" id="pwd" name="pwd" value="123456"/>
+						</div>
+						<!-- <p class="p5">
+							<label class="f-999999">验证码：</label>
+							<input class="code" type="text" id="code" name="vcode"/>
+							<a href="javascript: void(0)" class="transform">
+								<img src="${ctx}/verify" id="vimg" alt="验证码"/>
+							</a>
+						</p>  -->
+						<!-- <input class="che" type="checkbox" />
+						<label class="automatic">自动登录</label> -->
+						<label class="forget"><a href="#">忘记密码？</a></label>
+						<a href="javascript:void(0)" id="dl">
+							<input type="button" class="but" id="loginBtn" value="登录" />
+						</a> 
+						<label class="third">第三方登录 <a href="#"><img src="${ctx}/images/qq_03.png" width="17" height="18" /></a>
+
+							<a href="#"><img src="${ctx}/images/qq_06.png" width="23"
+								height="17" /></a>
+
+
+						</label>
+
+
+					</div>
+				</form>
+
+			</div>
+
+
+		</div>
+
+
+
+
+	</div>
+
+	<@footer_macro.footer/>
+
+</body>
+<!-- <script>
+	$('#dl').click(function() {
+		window.location.href = "index.html";
+	});
+	$('#dian').click(function() {
+		window.location.href = "registe.html";
+	});
+</script> -->
+</html>

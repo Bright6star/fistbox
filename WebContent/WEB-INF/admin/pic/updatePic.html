@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <#assign ctx=request.contextPath>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+   <script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+	<script type="text/javascript" src="${ctx}/js/tiny_mce/tiny_mce.js"></script>
+	
+ 
+</head>
+<body>
+
+<table class="table table-bordered table-hover definewidth m10">
+    <form id="addGoodsForm" action="${ctx}/admin/picturcarousel/updatePic" method="POST" class="definewidth m20" enctype="multipart/form-data">
+        
+        <tr>
+        	<td width="10%" class="tableleft">轮播图片</td>
+            <td><input type="file" name="pic" id="pic" value="${pic.imageUrl}"/>
+            	<input type="hidden" name="imageUrl" value="${pic.imageUrl}">
+            	<input type="hidden" name="id" value="${pic.id}">
+            </td>
+            
+            <td width="10%" class="tableleft">轮播请求URL</td>
+            <td><input type="text" name="requestUrl" id="requestUrl" value="${pic.requestUrl}"/></td>
+        </tr>
+        
+    </form>
+    <tr>
+        <td class="tableleft">
+          	&nbsp;&nbsp;<button type="submit" class="btn btn-primary" form="addGoodsForm">保存</button>
+            <br>&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

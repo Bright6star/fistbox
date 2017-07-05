@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对象到数据库表的映射和操作配置 -->
+<mapper namespace="Pic.mapper">
+	<sql id="findGood">
+		select * from picturecarousel
+	</sql>
+	
+	<select id="findByPic" resultMap="picResultMap">
+			<include refid="findGood"/>
+		order by id asc
+	</select>
+	
+	<select id="ShowPicOne" resultMap="picResultMap">
+			<include refid="findGood"/>
+		<where>
+			id = #{id}
+		</where>
+	</select>
+	
+	<update id="updatePic">
+		update picturecarousel set imageUrl = #{imageUrl},
+		requestUrl = #{requestUrl} where id = #{id}
+	</update>
+	
+	<delete id="deletePic">
+		delete from picturecarousel where id = #{id}
+	</delete>
+	
+	<insert id="savePic" >
+		insert into picturecarousel(imageUrl,requestUrl) 
+		values(#{imageUrl},#{requestUrl})  
+	</insert>
+
+	<resultMap id="picResultMap" type="Pic" autoMapping="true"/>
+	
+
+</mapper>

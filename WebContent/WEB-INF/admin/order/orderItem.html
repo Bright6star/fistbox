@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <#assign ctx=request.contextPath>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+    <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="${ctx}/assets/css/userList.css" />
+	
+	<script src="${ctx}/js/artDialog-6.0.2/lib/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+<script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+    </script>
+
+   
+</head>
+<script>
+    $(function () {
+        
+		$('#addnew').click(function(){
+
+				window.location.href="${ctx}/admin/user/toadduser";
+		 });
+
+
+    });
+
+	function del(id)
+	{
+		var d = dialog({
+			title: '温馨提示',
+		    content: '<font size=6 color=red>您确定要删除对应的数据吗?</font>',
+		    okValue:'确定',
+		    ok:function(){
+		    	this.title("请稍等...");
+		    	window.location="${ctx}/admin/user/delete?id="+id;
+		    	return false;
+		    },
+		    cancelValue:'取消',
+		    cancel:function(){}
+		});
+		d.showModal();
+	}
+</script>
+<body>
+<table class="table table-bordered table-hover definewidth m10" >
+    <thead>
+    <tr>
+    	<th>订单编号</th>
+        <th>商品</th>
+        <th>商品价格</th>
+        <th>商品优惠价格</th>
+        <th>购买数量</th>
+        <th>订单总金额</th>
+        <th>支付状态</th>
+       
+   	    </tr>
+    </thead>
+    	<#if orderItemList??>
+    	<#list orderItemList as orderItem>
+	     <tr>
+            <td>${orderItem.order.orderCode}</td>
+            <td>${orderItem.goods.title}</td>
+    
+            <td>${orderItem.goods.price}</td>
+            <td>${orderItem.goods.favorablePrice}</td>
+            <td>${orderItem.orderNum}</td>
+           
+            <td>${orderItem.order.totalAmount}</td>
+            
+            <td>
+            <#if orderItem.order.alipay==1>
+            <font color="green">已支付</font>
+            <#else>
+            <font color="red">未支付</font>
+            </#if>
+            </td>
+            
+           
+        </tr>
+        </#list>
+        </#if>
+        </table>
+</body>
+</html>

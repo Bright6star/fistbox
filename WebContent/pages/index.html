@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页</title>
+
+<#include "header.html"/>
+<#import "/macros/header_macros.html" as header_macro>
+<#import "/macros/footer_macros.html" as footer_macro>
+<#import "/macros/nav_macros.html" as nav_macro>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/index.css">
+
+
+<!--条件注释判断浏览器版本--> <!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+</head>
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:"${ctx}/getGoodsTypeAjax",
+			type:"post",
+			dataType:"json",
+			async:false,
+			success:function(data){
+				$.each(data,function(i,item){
+					if(i<=5){
+						var typeJson=item.goodstype;
+						var li = $("<li/>");
+						$("<a/>").attr("href","${ctx}/findGoods?typeCode="+goodstype.code)
+					}
+					
+				})
+			}
+		});
+	});
+</script>
+
+<body>
+
+	<@header_macro.header ctx="${ctx}"/>
+	<@nav_macro.nav ctx="${ctx}"/>
+	
+	<div class="banner" id="banner">
+		<ul class="pic" id="pic">
+			<#if picList??>
+				<#list picList as pic>
+					<li>
+					<a href="${ctx}/${pic.requestUrl}">
+					<img src="${ctx}/${pic.imageUrl}" width="1920" height="465" alt="banner">
+					</a>
+					</li>
+				</#list>
+			</#if>
+		</ul>
+
+
+		<ul class="num" id="num">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+
+		</ul>
+
+
+
+	</div>
+	<div class="content">
+		<div class="new">
+			<span class="mr-72">新品推荐</span>
+
+			<ul id="lu" class="lu">
+			<#if newgoodsList??>
+			<#list newgoodsList as newgoods>
+			
+				<li><a href="${ctx}/detail?id=${newgoods.id}"><img src="${ctx}/${newgoods.image}"
+						width="281" height="300" alt="pic" title="pic" /></a>
+
+					<div class="bg">
+						<a href="${ctx}/detail?id=${newgoods.id}">${newgoods.description}</a>
+					</div></li>
+			</#list>
+			</#if>
+			</ul>
+			
+			<div class="new-r" id="new">
+			<#if newbggoods??>
+			<#list newbggoods as newbg>
+				<img src="${ctx}/${newbg.image}" width="587" height="410" alt="pic"
+					title="pic" />
+				<div>
+					<a href="${ctx}/detail?id=${newbg.id}">${newbg.description}</a>
+				</div>
+			</#list>
+			</#if>
+				<p>
+					<span>掌柜推荐</span>新款促销！厂家特价5折出售！品质见证，放心购买！<br /> 现买此款还送：方向盘套 擦车毛巾 香包
+					静电贴 4样礼品！<br /> 绝对的划算！亲们注意：座套分大中小尺寸拍前备注车型或联系客服告知一下
+				</p>
+			</div>
+		</div>
+		<div class="hot">
+			<#if hotBGgoods??>
+			<#list hotBGgoods as hotbg>
+			<span class="mr-72">热卖产品</span>
+			<div class="left" id="hot">
+				<a href="${ctx}/detail?id=${hotbg.id}"><img src="${ctx}/${hotbg.image}"
+					width="284" height="629" alt="pic" title="pic" /></a>
+				<div>
+					<a href="${ctx}/detail?id=${hotbg.id}">${hotbg.description}</a>
+				</div>
+			</div>
+			</#list>
+			</#if>
+
+			<ul class="pro">
+				<#if hotgoods??>
+				<#list hotgoods as hot>
+				<li><a href="${ctx}/detail?id=${hot.id}"><img
+						src="${ctx}/${hot.image}" width="281" height="290" alt="pic"
+						title="pic" /></a>
+					<div id="one" class="moren">
+						<a href="${ctx}/detail?id=${hot.id}">${hot.description}</a>
+					</div></li>
+				</#list>
+				</#if>
+				
+			</ul>
+
+
+		</div>
+		<div class="summer">
+			<span class="mr-72">夏日必备</span>
+			<ul id="ul">
+				<#if summgoods??>
+				<#list summgoods as summ>
+				<li><a href="${ctx}/detail?id=${summ.id}"><img
+						src="${ctx}/${summ.image}" width="587" height="290" alt="pic"
+						title="pic" /></a>
+
+					<div>
+						<a href="${ctx}/detail?id=${summ.id}">${summ.description}
+						</a>
+					</div>
+					</li>
+				</#list>
+				</#if>
+			</ul>
+
+
+		</div>
+	</div>
+	
+	<@footer_macro.footer/>
+	
+</body>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/banner.js"></script>
+<script src="js/index.js"></script>
+<script src="js/mouse.js"></script>
+
+
+
+</html>

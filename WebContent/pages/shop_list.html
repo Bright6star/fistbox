@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>外部改装</title>
+
+<link rel="stylesheet" type="text/css" href="css/shop.css">
+<#include "header.html"/>
+<#import "/macros/header_macros.html" as header_macro>
+<#import "/macros/footer_macros.html" as footer_macro>
+<#import "/macros/nav_macros.html" as nav_macro>
+<!--条件注释判断浏览器版本-->
+
+<!--[if lt IE 9]>
+
+<script src="js/IE9.js"></script>
+
+<![endif]-->
+
+</head>
+
+<body>
+	
+	<@header_macro.header ctx="${ctx}"/>
+	<@nav_macro.nav ctx="${ctx}"/>
+
+
+	<div class="content">
+		<div class="ct_left">
+			<ul>
+				<li><a href="pro_details.html"><span>热卖精品</span><img
+						src="images/2_shop_18.jpg" width="192" height="251" alt="pic"
+						title="pic" /></a></li>
+
+				<li><a href="pro_details.html"><img
+						src="images/2_shop_23.jpg" width="192" height="299" alt="pic"
+						title="pic" /></a></li>
+
+			</ul>
+
+
+
+
+		</div>
+
+		<div class="ct_right">
+			<ul class="ct_right_top">
+				<li>位置：全部商品→外观改装</li>
+				<li>已选要求:<a href="#">起亚智跑</a> <a href="#">底盘护板</a> <a href="#">黑色</a></li>
+				<li>适用车型： 通用型号
+					<form class="test" action="#" method="post">
+						<input type="text" />
+
+						<button>搜车型</button>
+
+					</form>
+
+
+				</li>
+				<li>商品选择： <a href="#">车身改色 </a> <a href="#">车窗贴膜 </a> <a
+					href="#">护杠加装 </a> <a href="#">灯光改造 </a> <a href="#">底盘护板 </a>
+				</li>
+				<li>颜色选择： <a href="#"><img src="images/2_shop_03.jpg" /> 黑色
+				</a> <a href="#"><img src="images/2_shop_05.jpg" /> 银色 </a> <a href="#"><img
+						src="images/2_shop_07.jpg" /> 金色 </a>
+
+				</li>
+
+			</ul>
+			<ul class="ct_right_buttom">
+				<#if goodsList??>
+				<#list goodsList as goods>
+				
+					<li>
+					<a href="${ctx}/detail?id=${goods.id}">
+					<img src="${ctx}/${goods.image}" width="233" height="298" alt="pic" title="pic" />
+						<#if goods.title?length lt 20>
+							${goods.title}
+						<#else>
+							${goods.title[0..20]}
+						</#if>
+					<span>¥${goods.price}</span>
+					</a>
+					</li>
+				</#list>
+				</#if>
+				
+			</ul>
+			 <div class="page">
+			 	<#if pageModel.recordCount??>
+			    <#import "common/pager.html" as page>
+			    <@page.pager pageIndex=pageModel.pageIndex pageSize=pageModel.pageSize
+			     recordCount=pageModel.recordCount toURL="${ctx}/searchs"/>
+			 	</#if>
+			</div> 
+ 
+
+		</div>
+
+
+		<div class="clear"></div>
+	</div>
+<@footer_macro.footer/>
+</body>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+	$(function() {
+		$('.ct_right_top li a').click(function() {
+
+			$(this).parent().each(function() {//移除其余非点中状态
+
+				$('.ct_right_top li a').removeClass("bg");
+			});
+			$(this).addClass("bg");//给所点中的增加样式
+			//alert($(this).text());//输出所点的a的内容
+		})
+	})
+</script>
+</html>

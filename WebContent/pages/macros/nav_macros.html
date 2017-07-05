@@ -1,0 +1,31 @@
+<#macro nav ctx>
+	<div class="nav">
+		<ul class="nav_nav">
+			<li><div class="gib">
+					<div id="oneo">
+						<a href="#">全部商品</a>
+					</div>
+					<div id="mune" class="pd_navlist" onMouseOut="out2()"
+						onMouseOver="show2()">
+						<ul>
+						<#if goodstypeList??>
+						<#list goodstypeList[1..9] as typelist>
+							<li><a href="${ctx}/${typelist.remark}"><img src="images/3_pro_details_03.png"
+									width="8" height="8" />${typelist.name}</a></li>
+							
+						</#list>
+						</#if>
+						</ul>
+					</div>
+				</div></li>
+				<li><a href="index.html">首页</a></li>
+				<#if goodstypeList??>
+			<#list goodstypeList[1..5] as typelist>
+			<li><a href="${ctx}/${typelist.remark}">${typelist.name}</a></li>
+			</#list>
+			</#if>
+		</ul>
+
+	</div>
+	
+</#macro>
